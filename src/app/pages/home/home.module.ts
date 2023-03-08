@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../../components/explore-contai
 
 import { Tab1PageRoutingModule } from './home-routing.module';
 import {WorkoutItemListComponent} from "../../components/workout-item-list/workout-item-list.component";
+import {WorkoutItemComponentModule} from "../../components/workout-item/workout-item.module";
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import {WorkoutItemListComponent} from "../../components/workout-item-list/worko
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    Tab1PageRoutingModule,
+    WorkoutItemComponentModule
   ],
   declarations: [HomePage, WorkoutItemListComponent]
 })
