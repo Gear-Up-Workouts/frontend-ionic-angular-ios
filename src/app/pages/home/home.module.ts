@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 import { ExploreContainerComponentModule } from '../../components/explore-container/explore-container.module';
 
 import { Tab1PageRoutingModule } from './home-routing.module';
+import {WorkoutItemListComponent} from "../../components/workout-item-list/workout-item-list.component";
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { Tab1PageRoutingModule } from './home-routing.module';
     ExploreContainerComponentModule,
     Tab1PageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, WorkoutItemListComponent]
 })
 export class Tab1PageModule {}
