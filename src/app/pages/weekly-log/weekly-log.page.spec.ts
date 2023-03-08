@@ -3,19 +3,19 @@ import { IonicModule } from '@ionic/angular';
 
 import { ExploreContainerComponentModule } from '../../components/explore-container/explore-container.module';
 
-import { Tab1Page } from './tab1.page';
+import { WeeklyLogPage } from './weekly-log.page';
 
-describe('Tab1Page', () => {
-  let component: Tab1Page;
-  let fixture: ComponentFixture<Tab1Page>;
+describe('Tab2Page', () => {
+  let component: WeeklyLogPage;
+  let fixture: ComponentFixture<WeeklyLogPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Tab1Page],
+      declarations: [WeeklyLogPage],
       imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Tab1Page);
+    fixture = TestBed.createComponent(WeeklyLogPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
