@@ -7,9 +7,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="w-full h-full grid place-content-center">
-    <p class="text-center text-4xl py-10">{{dailyMessage}}</p>
-    <p>Today's Workout</p>
-
+  <div class="h-2/6 w-full grid grid-cols-1 grid-rows-auto justify-center content-end mt-40">
+    <p class="text-center text-4xl py-10 w-full">{{dailyMessage}}</p>
+    <p class="text-center mb-4">Today's Workout</p>
   </div>
+  <app-workout-item-list></app-workout-item-list>
 </ion-content>
