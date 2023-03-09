@@ -16,6 +16,7 @@ export class HomePage {
 
   constructor() {
 
+    // Fake data
     this.workoutItems = [
       new WorkoutData({bodyGroup: "arms", workoutName: "bicep curls", workoutWeight: 25, workoutReps: 10}),
       new WorkoutData({bodyGroup: "back", workoutName: "lat pull down", workoutWeight: 65, workoutReps: 8}),
