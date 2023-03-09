@@ -5,7 +5,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class WorkoutService {
+export class ApiService {
 
   apiBaseUrl: string = "http://localhost:8888";
 
