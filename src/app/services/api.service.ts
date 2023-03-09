@@ -7,12 +7,13 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ApiService {
 
-  apiBaseUrl: string = "http://localhost:8888";
+  apiBaseUrl: string = "http://localhost:5000";
 
   constructor(private http: HttpClient) {
   }
 
-  private sendRequestToExpress(endpoint: string): Promise<any> {
+  // Send request to server
+  private sendRequestToApi(endpoint: string): Promise<any> {
     return lastValueFrom(this.http.get(this.apiBaseUrl + endpoint)).then(
       (resp) => {
         return resp;
@@ -22,4 +23,12 @@ export class ApiService {
       }
     );
   }
+
+  // aboutMe(): Promise<> {
+  //   //This line is sending a request to express, which returns a promise with some data. We're then parsing the data
+  //   return this.sendRequestToApi("/").then((data) => {
+  //     return new ProfileData(data);
+  //   });
+  // }
+
 }

@@ -1,23 +1,23 @@
-<div
+<div *ngIf="workout"
   class="rounded-full bg-secondary my-4 mx-8 h-20 grid grid-cols-8 grid-rows-2 group hover:scale-105 hover:bg-primary transition-all ease-in-out delay-75">
 
   <p class="text-center col-start-1 col-span-2 row-span-2 self-center capitalize border-r-4 border-double
-    group-hover:text-secondary group-hover:border-secondary">{{bodyGroup}}</p>
+    group-hover:text-secondary group-hover:border-secondary">{{workout.bodyGroup}}</p>
 
   <p
-    class="text-center col-start-3 col-span-3 row-span-2 self-center capitalize group-hover:text-secondary">{{workoutName}}</p>
+    class="text-center col-start-3 col-span-3 row-span-2 self-center capitalize group-hover:text-secondary">{{workout.workoutName}}</p>
 
   <div class="col-start-6 col-span-3 row-span-1 self-end flex ml-3 group-hover:text-secondary">
     <ion-icon class="text-center pr-2 self-center" name="barbell-outline"></ion-icon>
     <p class="text-center">
-      {{workoutWeight}} lbs
+      {{workout.workoutWeight}} lbs
     </p>
   </div>
 
   <div class="col-start-6 col-span-3 row-span-1 self-start flex ml-3 group-hover:text-secondary">
     <ion-icon class="text-center pr-2 self-center " name="repeat-outline"></ion-icon>
     <p class="text-center">
-      x {{workoutReps}}
+      x {{workout.workoutReps}}
     </p>
   </div>
 

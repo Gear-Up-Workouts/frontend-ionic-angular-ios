@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {WorkoutData} from "../../data/workout-data";
 
 @Component({
   selector: 'app-workout-item',
@@ -6,13 +7,8 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./workout-item.component.scss'],
 })
 export class WorkoutItemComponent implements OnInit {
-
-  @Input() bodyGroup:string = "";
-  @Input() workoutName:string = "";
-  @Input() workoutWeight:number = 0;
-  @Input() workoutReps:number = 0;
-  @Input() workoutInstructions?:string;
-
+  @Input()
+  workout?: WorkoutData;
 
   constructor() {
     // this.bodyGroup = "arms";
@@ -22,7 +18,5 @@ export class WorkoutItemComponent implements OnInit {
     // this.workoutInstructions = "Start with carrying the weight above your head. Then, push it up. Next, eat a donut to give yourself energy..."
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
