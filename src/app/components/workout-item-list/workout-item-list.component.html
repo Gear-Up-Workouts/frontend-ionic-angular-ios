@@ -1,0 +1,6 @@
+<div *ngFor="let w of workoutItems" >
+  <app-workout-item
+    [bodyGroup]="w['bodyGroup']" [workoutName]="w['workoutName']" [workoutWeight]="w['workoutWeight']"
+    [workoutReps]="w['workoutReps']">
+  </app-workout-item>
+</div>

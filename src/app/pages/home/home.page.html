@@ -1,19 +1,16 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div class="text-center text-6xl">Home</div>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div class="h-2/6 w-full grid grid-cols-1 justify-center content-end mt-40">
+    <p class="text-center text-4xl font-semibold">{{day}}</p>
+    <p class="text-center text-3xl py-10 w-full text-primary animate-pulse">{{dailyMessage}}</p>
+    <p class="text-center mb-4">Today's Workout</p>
+  </div>
+  <app-workout-item-list></app-workout-item-list>
 </ion-content>
