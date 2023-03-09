@@ -8,16 +8,9 @@ import {WorkoutData} from "../../data/workout-data";
 })
 export class WorkoutItemListComponent implements OnInit {
 
-  workoutItems: WorkoutData[];
+  @Input() workoutItems?: WorkoutData[];
 
   constructor() {
-    this.workoutItems = [
-      new WorkoutData({bodyGroup: "arms", workoutName: "bicep curls", workoutWeight: 25, workoutReps: 10}),
-      new WorkoutData({bodyGroup: "back", workoutName: "lat pull down", workoutWeight: 65, workoutReps: 8}),
-      new WorkoutData({bodyGroup: "legs", workoutName: "squat", workoutWeight: 125, workoutReps: 4}),
-      new WorkoutData({bodyGroup: "arms", workoutName: "tri pull downs", workoutWeight: 35, workoutReps: 10}),
-      new WorkoutData({bodyGroup: "back", workoutName: "rows", workoutWeight: 55, workoutReps: 7}),
-    ];
   }
 
   ngOnInit() {

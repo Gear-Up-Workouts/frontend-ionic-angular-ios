@@ -1,3 +1,5 @@
-<div *ngFor="let w of workoutItems">
-  <app-workout-item [workout]="w"></app-workout-item>
+<div *ngIf="workoutItems">
+  <div *ngFor="let w of workoutItems">
+    <app-workout-item [workout]="w"></app-workout-item>
+  </div>
 </div>
