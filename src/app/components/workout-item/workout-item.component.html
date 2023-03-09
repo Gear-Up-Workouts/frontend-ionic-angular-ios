@@ -1,21 +1,21 @@
 <div
-  class="rounded-full bg-[#14213d] mx-8 h-20 grid grid-cols-8 grid-rows-2 group hover:bg-[#e5e5e5] transition-all ease-in-out delay-75">
+  class="rounded-full bg-[#14213d] mx-8 h-20 grid grid-cols-8 grid-rows-2 group hover:bg-[#fca311] transition-all ease-in-out delay-75">
   <p class="text-center col-start-1 col-span-2 row-span-2 self-center capitalize border-r-4 border-double
     group-hover:text-[#14213d] group-hover:border-[#14213d]">{{bodyGroup}}</p>
 
   <p
     class="text-center col-start-3 col-span-3 row-span-2 self-center capitalize group-hover:text-[#14213d]">{{workoutName}}</p>
 
-  <div class="col-start-6 col-span-3 row-span-1 self-end flex ml-3">
+  <div class="col-start-6 col-span-3 row-span-1 self-end flex ml-3 group-hover:text-[#14213d]">
     <ion-icon class="text-center pr-2 self-center" name="barbell-outline"></ion-icon>
-    <p class="text-center group-hover:text-[#14213d]">
+    <p class="text-center">
       {{workoutWeight}} lbs
     </p>
   </div>
 
-  <div class="col-start-6 col-span-3 row-span-1 self-start flex ml-3">
-    <ion-icon class="text-center pr-2 self-center" name="repeat-outline"></ion-icon>
-    <p class="text-center group-hover:text-[#14213d]">
+  <div class="col-start-6 col-span-3 row-span-1 self-start flex ml-3 group-hover:text-[#14213d]">
+    <ion-icon class="text-center pr-2 self-center " name="repeat-outline"></ion-icon>
+    <p class="text-center">
       x {{workoutReps}}
     </p>
   </div>
