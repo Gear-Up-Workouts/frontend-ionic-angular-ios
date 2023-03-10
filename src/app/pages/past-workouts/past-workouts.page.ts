@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { WorkoutSetData } from '../../data/workout-set-data';
+import {interval} from "rxjs";
 
 @Component({
   selector: 'app-past-workouts',
@@ -13,6 +14,7 @@ export class PastWorkoutsPage {
 
   constructor() {
     this.updateDay();
+    this.setAutoUpdateDate();
 
     this.addFakeData();
 
@@ -36,6 +38,13 @@ export class PastWorkoutsPage {
       weekday: 'long',
       month: 'long',
       day: 'numeric',
+    });
+  }
+
+  setAutoUpdateDate() {
+    const secondCounter = interval(60 * 1000);
+    secondCounter.subscribe(() => {
+      this.updateDay();
     });
   }
 
