@@ -31,4 +31,8 @@ export class ApiService {
   //   });
   // }
 
+  test() {
+    return this.sendRequestToApi("/");
+  }
+
 }
