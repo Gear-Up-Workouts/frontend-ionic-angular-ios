@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { interval } from 'rxjs';
 import { WorkoutData } from '../../data/workout-data';
 import { ApiService } from '../../services/api.service';
+import { WorkoutSetData } from '../../data/workout-set-data';
 
 @Component({
   selector: 'app-home',
@@ -12,43 +13,10 @@ export class HomePage {
   date: Date;
   day: string = '';
   dailyMessage: string = 'Rise and Grind!';
-
-  workoutItems: WorkoutData[];
+  workoutSet: WorkoutSetData = new WorkoutSetData({workouts : []});
 
   constructor(private apiService: ApiService) {
-    // Fake data
-    this.workoutItems = [
-      new WorkoutData({
-        bodyGroup: 'arms',
-        workoutName: 'bicep curls',
-        workoutWeight: 25,
-        workoutReps: 10,
-      }),
-      new WorkoutData({
-        bodyGroup: 'back',
-        workoutName: 'lat pull down',
-        workoutWeight: 65,
-        workoutReps: 8,
-      }),
-      new WorkoutData({
-        bodyGroup: 'legs',
-        workoutName: 'squat',
-        workoutWeight: 125,
-        workoutReps: 4,
-      }),
-      new WorkoutData({
-        bodyGroup: 'arms',
-        workoutName: 'tri pull downs',
-        workoutWeight: 35,
-        workoutReps: 10,
-      }),
-      new WorkoutData({
-        bodyGroup: 'back',
-        workoutName: 'rows',
-        workoutWeight: 55,
-        workoutReps: 7,
-      }),
-    ];
+    this.addFakeData();
 
     this.date = new Date();
     this.updateDay();
@@ -73,6 +41,44 @@ export class HomePage {
     const secondCounter = interval(60 * 1000);
     secondCounter.subscribe(() => {
       this.updateDay();
+    });
+  }
+
+  addFakeData() {
+    // Fake data
+    this.workoutSet = new WorkoutSetData({
+      workouts: [
+        {
+          bodyGroup: 'arms',
+          workoutName: 'bicep curls',
+          workoutWeight: 25,
+          workoutReps: 10,
+        },
+        {
+          bodyGroup: 'back',
+          workoutName: 'lat pull down',
+          workoutWeight: 65,
+          workoutReps: 8,
+        },
+        {
+          bodyGroup: 'legs',
+          workoutName: 'squat',
+          workoutWeight: 125,
+          workoutReps: 4,
+        },
+        {
+          bodyGroup: 'arms',
+          workoutName: 'tri pull downs',
+          workoutWeight: 35,
+          workoutReps: 10,
+        },
+        {
+          bodyGroup: 'back',
+          workoutName: 'rows',
+          workoutWeight: 55,
+          workoutReps: 7,
+        },
+      ],
     });
   }
 }

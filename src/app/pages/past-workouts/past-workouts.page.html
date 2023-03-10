@@ -1,19 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Past Workouts
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div *ngFor="let set of pastWorkouts" class="mb-10">
 
-  <div class="text-center text-6xl">Past Workouts</div>
+    <p class="text-primary text-xl font-semibold pl-5 first:mt-3" *ngIf="set.dateString === todayDate">Today</p>
+    <p class="text-primary text-xl font-semibold pl-5 first:mt-3" *ngIf="set.dateString === yesterdayDate">Yesterday</p>
+    <p class="text-primary text-xl font-semibold pl-5 first:mt-3"
+       *ngIf="set.dateString !== todayDate && set.dateString !== yesterdayDate">{{set.dateString}}</p>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+
+    <div *ngFor="let w of set.workouts">
+      <app-workout-item [workout]="w"></app-workout-item>
+    </div>
+  </div>
 </ion-content>

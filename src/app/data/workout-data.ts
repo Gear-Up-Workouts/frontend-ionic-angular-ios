@@ -1,10 +1,11 @@
 export class WorkoutData {
-  bodyGroup:string;
-  workoutName:string;
-  workoutWeight:number;
-  workoutReps:number;
+  bodyGroup: string;
+  workoutName: string;
+  workoutWeight: number;
+  workoutReps: number;
+  workoutGuide?: string;
 
-  constructor(objectModel:{}) {
+  constructor(objectModel: {}) {
     // @ts-ignore
     this.bodyGroup = objectModel['bodyGroup'];
 
@@ -16,15 +17,8 @@ export class WorkoutData {
 
     // @ts-ignore
     this.workoutReps = objectModel['workoutReps'];
-  }
 
-  // constructor(bodyGroup:string, workoutName:string, workoutWeight:number, workoutReps:number) {
-  //   this.bodyGroup = bodyGroup;
-  //
-  //   this.workoutName = workoutName;
-  //
-  //   this.workoutWeight = workoutWeight;
-  //
-  //   this.workoutReps = workoutReps;
-  // }
+    // @ts-ignore
+    this.workoutGuide = objectModel['workoutGuide'];
+  }
 }
