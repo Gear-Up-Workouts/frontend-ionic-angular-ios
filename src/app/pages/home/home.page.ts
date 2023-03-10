@@ -11,7 +11,7 @@ import { ApiService } from '../../services/api.service';
 export class HomePage {
   date: Date;
   day: string = '';
-  dailyMessage: string = 'Rise amd Grind!';
+  dailyMessage: string = 'Rise and Grind!';
 
   workoutItems: WorkoutData[];
 
