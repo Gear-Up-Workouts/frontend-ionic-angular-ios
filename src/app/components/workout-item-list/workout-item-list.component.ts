@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WorkoutData } from '../../data/workout-data';
 
+// noinspection AngularMissingOrInvalidDeclarationInModule
 @Component({
   selector: 'app-workout-item-list',
   templateUrl: './workout-item-list.component.html',
