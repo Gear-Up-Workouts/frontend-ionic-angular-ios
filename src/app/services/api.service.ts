@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ApiService {
 
-  apiBaseUrl: string = "http://localhost:5000";
+  apiBaseUrl: string = "http://127.0.0.1:5000";
 
   constructor(private http: HttpClient) {
   }
@@ -16,9 +16,11 @@ export class ApiService {
   private sendRequestToApi(endpoint: string): Promise<any> {
     return lastValueFrom(this.http.get(this.apiBaseUrl + endpoint)).then(
       (resp) => {
+        console.log("ApiServ: Resp: ", resp);
         return resp;
       },
       (err) => {
+        console.log("ApiServ: Err: ", err);
         return err;
       }
     );

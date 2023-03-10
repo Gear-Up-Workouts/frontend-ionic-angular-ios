@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { interval } from 'rxjs';
 import { WorkoutData } from '../../data/workout-data';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomePage {
 
   workoutItems: WorkoutData[];
 
-  constructor() {
+  constructor(private apiService: ApiService) {
     // Fake data
     this.workoutItems = [
       new WorkoutData({
@@ -53,7 +54,10 @@ export class HomePage {
     this.updateDay();
     this.setAutoUpdateDate();
 
-    this.dailyMessage = 'Pump some iron!';
+    this.apiService.test().then((data) => {
+      this.dailyMessage = data;
+      console.log(data);
+    });
   }
 
   updateDay() {
