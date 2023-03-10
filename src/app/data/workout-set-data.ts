@@ -7,8 +7,8 @@ export class WorkoutSetData {
 
   dateString: string;
 
-  constructor(objectModel: {}) {
-    this.date = new Date();
+  constructor(objectModel: {}, date = new Date()) {
+    this.date = date;
     this.dateString = this.date.toLocaleDateString('en-US', {
       weekday: 'long',
       month: 'long',
