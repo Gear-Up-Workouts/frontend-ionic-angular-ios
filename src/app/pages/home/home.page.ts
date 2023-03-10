@@ -13,10 +13,38 @@ export class HomePage {
   date: Date;
   day: string = '';
   dailyMessage: string = 'Rise and Grind!';
-
-  workoutSet: WorkoutSetData;
+  workoutSet: WorkoutSetData = new WorkoutSetData({workouts : []});
 
   constructor(private apiService: ApiService) {
+    this.addFakeData();
+
+    this.date = new Date();
+    this.updateDay();
+    this.setAutoUpdateDate();
+
+    // this.apiService.test().then((data) => {
+    //   this.dailyMessage = data;
+    //   console.log(data);
+    // });
+  }
+
+  updateDay() {
+    this.date = new Date();
+    this.day = this.date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
+
+  setAutoUpdateDate() {
+    const secondCounter = interval(60 * 1000);
+    secondCounter.subscribe(() => {
+      this.updateDay();
+    });
+  }
+
+  addFakeData() {
     // Fake data
     this.workoutSet = new WorkoutSetData({
       workouts: [
@@ -51,31 +79,6 @@ export class HomePage {
           workoutReps: 7,
         },
       ],
-    });
-
-    this.date = new Date();
-    this.updateDay();
-    this.setAutoUpdateDate();
-
-    // this.apiService.test().then((data) => {
-    //   this.dailyMessage = data;
-    //   console.log(data);
-    // });
-  }
-
-  updateDay() {
-    this.date = new Date();
-    this.day = this.date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-    });
-  }
-
-  setAutoUpdateDate() {
-    const secondCounter = interval(60 * 1000);
-    secondCounter.subscribe(() => {
-      this.updateDay();
     });
   }
 }
