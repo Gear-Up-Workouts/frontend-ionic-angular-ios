@@ -9,6 +9,7 @@ export class WeeklyLogPage {
   date: Date;
   isSunday: boolean = true;
   encouragingMessage: string = "You're doing amazing!";
+  stats:string[] = [];
 
   constructor() {
     this.date = new Date();
@@ -16,5 +17,14 @@ export class WeeklyLogPage {
     if (this.date.getDay() === 0) {
       this.isSunday = true;
     }
+
+    this.addFakeData();
+  }
+
+
+
+
+  addFakeData() {
+    this.stats = ['a', 'b', 'c', 'd', 'e'];
   }
 }

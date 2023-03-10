@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-weekly-stat-item',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./weekly-stat-item.component.scss'],
 })
 export class WeeklyStatItemComponent  implements OnInit {
+
+  @Input() stat?:string;
 
   constructor() { }
 

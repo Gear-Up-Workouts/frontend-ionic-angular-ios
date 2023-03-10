@@ -24,6 +24,8 @@
            oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
            [disabled]="!isSunday">
 
-    <p class="my-14">Your Weekly Stats</p>
+    <p class="mt-14">Your Weekly Stats</p>
   </div>
+
+  <app-weekly-stat-item-list [stats]="stats"></app-weekly-stat-item-list>
 </ion-content>
