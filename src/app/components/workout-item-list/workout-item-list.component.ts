@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {WorkoutData} from "../../data/workout-data";
+import { Component, Input, OnInit } from '@angular/core';
+import { WorkoutData } from '../../data/workout-data';
 
 @Component({
   selector: 'app-workout-item-list',
@@ -7,13 +7,9 @@ import {WorkoutData} from "../../data/workout-data";
   styleUrls: ['./workout-item-list.component.scss'],
 })
 export class WorkoutItemListComponent implements OnInit {
+  @Input() workouts?: WorkoutData[];
 
-  @Input() workoutItems?: WorkoutData[];
+  constructor() {}
 
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
