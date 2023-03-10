@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { PastWorkoutsPage } from './past-workouts.page';
 import { ExploreContainerComponentModule } from '../../components/explore-container/explore-container.module';
 
-import { Tab3PageRoutingModule } from './past-workouts-routing.module';
+import { PastWorkoutsPageRoutingModule } from './past-workouts-routing.module';
 import {WorkoutItemComponentModule} from "../../components/workout-item/workout-item.module";
 
 @NgModule({
@@ -14,7 +14,7 @@ import {WorkoutItemComponentModule} from "../../components/workout-item/workout-
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab3PageRoutingModule,
+    PastWorkoutsPageRoutingModule,
     WorkoutItemComponentModule,
   ],
   declarations: [PastWorkoutsPage],

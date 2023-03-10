@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { WeeklyLogPage } from './weekly-log.page';
 import { ExploreContainerComponentModule } from '../../components/explore-container/explore-container.module';
 
-import { Tab2PageRoutingModule } from './weekly-log-routing.module';
+import { WeeklyLogPageRoutingModule } from './weekly-log-routing.module';
 
 @NgModule({
   imports: [
@@ -13,7 +13,7 @@ import { Tab2PageRoutingModule } from './weekly-log-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab2PageRoutingModule
+    WeeklyLogPageRoutingModule
   ],
   declarations: [WeeklyLogPage]
 })
