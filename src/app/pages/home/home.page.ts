@@ -54,10 +54,10 @@ export class HomePage {
     this.updateDay();
     this.setAutoUpdateDate();
 
-    this.apiService.test().then((data) => {
-      this.dailyMessage = data;
-      console.log(data);
-    });
+    // this.apiService.test().then((data) => {
+    //   this.dailyMessage = data;
+    //   console.log(data);
+    // });
   }
 
   updateDay() {
