@@ -6,6 +6,7 @@ import { PastWorkoutsPage } from './past-workouts.page';
 import { ExploreContainerComponentModule } from '../../components/explore-container/explore-container.module';
 
 import { Tab3PageRoutingModule } from './past-workouts-routing.module';
+import {WorkoutItemComponentModule} from "../../components/workout-item/workout-item.module";
 
 @NgModule({
   imports: [
@@ -13,8 +14,9 @@ import { Tab3PageRoutingModule } from './past-workouts-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab3PageRoutingModule
+    Tab3PageRoutingModule,
+    WorkoutItemComponentModule,
   ],
-  declarations: [PastWorkoutsPage]
+  declarations: [PastWorkoutsPage],
 })
 export class Tab3PageModule {}

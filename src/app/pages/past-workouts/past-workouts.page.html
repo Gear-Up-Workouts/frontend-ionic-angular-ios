@@ -7,5 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <div *ngFor="let set of pastWorkouts" class="mb-10">
 
+    <p class="text-primary text-xl font-semibold pl-5 first:mt-3" *ngIf="set.dateString === todayDate">Today</p>
+    <p class="text-primary text-xl font-semibold pl-5 first:mt-3" *ngIf="set.dateString === yesterdayDate">Yesterday</p>
+    <p class="text-primary text-xl font-semibold pl-5 first:mt-3"
+       *ngIf="set.dateString !== todayDate && set.dateString !== yesterdayDate">{{set.dateString}}</p>
+
+
+    <div *ngFor="let w of set.workouts">
+      <app-workout-item [workout]="w"></app-workout-item>
+    </div>
+  </div>
 </ion-content>
