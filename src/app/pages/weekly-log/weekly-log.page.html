@@ -1,19 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Weekly Log
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="text-center grid">
+    <p
+      class="break-normal text-4xl text-primary mt-28 animate-pulse hover:animate-spin delay-75 ease-in-out">
+      {{encouragingMessage}}
+    </p>
 
-  <div class="text-center text-6xl">Weekly Log</div>
+    <p class="mt-10 mb-4 font-semibold" *ngIf="!isSunday">It's not Sunday just yet...</p>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <div class="mt-10 mb-4 font-semibold" *ngIf="isSunday">
+      <img src="/assets/minions.gif" alt="minions congrats" class="mb-6">
+      <p>It's time to log your weight:</p>
+    </div>
+
+    <input type="number" class="w-6/12 justify-self-center rounded text-center" value="" placeholder="123" maxlength="3"
+           oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+           [disabled]="!isSunday">
+
+    <p class="mt-14">Your Weekly Stats</p>
+  </div>
+
+  <app-weekly-stat-item-list [stats]="stats"></app-weekly-stat-item-list>
 </ion-content>
