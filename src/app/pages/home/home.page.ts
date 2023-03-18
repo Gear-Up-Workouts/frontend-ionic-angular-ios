@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { interval } from 'rxjs';
-import { WorkoutData } from '../../data/workout-data';
 import { ApiService } from '../../services/api.service';
 import { WorkoutSetData } from '../../data/workout-set-data';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -13,19 +13,53 @@ export class HomePage {
   date: Date;
   day: string = '';
   dailyMessage: string = 'Rise and Grind!';
-  workoutSet: WorkoutSetData = new WorkoutSetData({workouts : []});
+  workoutSet: WorkoutSetData = new WorkoutSetData({ workouts: [] });
+  hasOnboarded: boolean = false;
+  username: string = '';
+  hasGymAccess: boolean = false;
+  userProficiency: number = 1;
 
-  constructor(private apiService: ApiService) {
+  constructor(
+    private apiService: ApiService,
+    private toastController: ToastController
+  ) {
+    // this.apiService.clearUser();
+
     this.addFakeData();
 
     this.date = new Date();
     this.updateDay();
     this.setAutoUpdateDate();
 
-    // this.apiService.test().then((data) => {
-    //   this.dailyMessage = data;
-    //   console.log(data);
-    // });
+    // Check if user exists and add welcome toast
+    this.apiService.hasUser().then((bool) => {
+      this.hasOnboarded = bool;
+
+      if (bool) {
+        this.apiService.getUser('username').then((user) => {
+          this.presentToast(user);
+        });
+      }
+    });
+  }
+
+  async presentToast(username: string) {
+    const toast = await this.toastController.create({
+      message: 'Welcome back ' + username + '!',
+      duration: 1500,
+      position: 'top',
+      icon: 'happy-outline',
+      cssClass: 'text-center',
+    });
+
+    await toast.present();
+  }
+
+  setOnboarding() {
+    this.hasOnboarded = true;
+
+    // Set user data
+    this.apiService.setUser('username', this.username);
   }
 
   updateDay() {

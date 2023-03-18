@@ -1,16 +1,69 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Home
-    </ion-title>
+    <ion-title> Home </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="w-full grid grid-cols-1 justify-center mt-14">
     <p class="text-center text-4xl font-bold">{{day}}</p>
-    <p class="text-center text-3xl py-10 w-full text-primary animate-pulse">{{dailyMessage}}</p>
+    <p class="text-center text-3xl py-10 w-full text-primary animate-pulse">
+      {{dailyMessage}}
+    </p>
     <p class="text-center mb-4">Today's Workout</p>
   </div>
-  <app-workout-item-list [workouts]="workoutSet.workouts"></app-workout-item-list>
+  <app-workout-item-list
+    [workouts]="workoutSet.workouts"
+  ></app-workout-item-list>
+
+  <ion-modal [isOpen]="!hasOnboarded">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Welcome!</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding text-center">
+        <div class="mt-32">
+          <ion-label position="stacked">Enter your username:</ion-label>
+          <ion-input
+            type="text"
+            placeholder="The goodest user is..."
+            [(ngModel)]="username"
+          ></ion-input>
+        </div>
+
+        <div class="m-12">
+          <ion-label position="stacked">Do you have gym access?</ion-label>
+          <br />
+          <ion-button
+            class="w-4/12"
+            (click)="hasGymAccess = true"
+            [color]="hasGymAccess && 'primary' || 'medium'"
+            >Yes</ion-button
+          >
+          <ion-button
+            class="w-4/12"
+            (click)="hasGymAccess = false"
+            [color]="!hasGymAccess && 'primary' || 'medium'"
+            >No</ion-button
+          >
+          <br />
+        </div>
+
+        <div class="mb-6">
+          <ion-label position="stacked">Enter your proficiency:</ion-label>
+          <ion-input
+            type="number"
+            placeholder="Enter a number 1-5"
+            [(ngModel)]="userProficiency"
+          ></ion-input>
+        </div>
+
+        <div>
+          <ion-button (click)="setOnboarding()">Complete Onboarding</ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

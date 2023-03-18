@@ -1,26 +1,44 @@
-import {Injectable} from '@angular/core';
-import {lastValueFrom} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
+  apiBaseUrl: string = 'http://127.0.0.1:5000';
 
-  apiBaseUrl: string = "http://127.0.0.1:5000";
+  constructor(private http: HttpClient, private storage: Storage) {
+    this.storage.create();
+  }
 
-  constructor(private http: HttpClient) {
+  // STORAGE
+  public setUser(key: string, value: any) {
+    this.storage.set(key, value);
+  }
+
+  public async getUser(key: string) {
+    return await this.storage.get(key);
+  }
+
+  public async hasUser() {
+    return (await this.storage.length()) != 0;
+  }
+
+  public async clearUser() {
+    return await this.storage.clear();
   }
 
   // Send request to server
   private sendRequestToApi(endpoint: string): Promise<any> {
     return lastValueFrom(this.http.get(this.apiBaseUrl + endpoint)).then(
       (resp) => {
-        console.log("ApiServ: Resp: ", resp);
+        console.log('ApiServ: Resp: ', resp);
         return resp;
       },
       (err) => {
-        console.log("ApiServ: Err: ", err);
+        console.log('ApiServ: Err: ', err);
         return err;
       }
     );
@@ -34,7 +52,6 @@ export class ApiService {
   // }
 
   test() {
-    return this.sendRequestToApi("/");
+    return this.sendRequestToApi('/');
   }
-
 }
