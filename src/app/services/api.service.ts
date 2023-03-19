@@ -14,19 +14,19 @@ export class ApiService {
   }
 
   // STORAGE
-  public setUser(key: string, value: any) {
+  public setLocalUser(key: string, value: any) {
     this.storage.set(key, value);
   }
 
-  public async getUser(key: string) {
+  public async getLocalUser(key: string) {
     return await this.storage.get(key);
   }
 
-  public async hasUser() {
+  public async hasLocalUser() {
     return (await this.storage.length()) != 0;
   }
 
-  public async clearUser() {
+  public async clearLocalUser() {
     return await this.storage.clear();
   }
 
