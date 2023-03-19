@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WorkoutSetData } from '../../data/workout-set-data';
-import {interval} from "rxjs";
+import { interval } from 'rxjs';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-past-workouts',
@@ -12,11 +13,19 @@ export class PastWorkoutsPage {
   todayDate: string = '';
   yesterdayDate: string = '';
 
-  constructor() {
+  constructor(private apiService: ApiService) {
+    // Add fake data
+    // this.addFakeData();
+
     this.updateDay();
     this.setAutoUpdateDate();
 
-    this.addFakeData();
+    // Get local user and display past workouts
+    this.apiService.getLocalUser('username').then((user) => {
+      this.apiService.getWorkoutHistory(user).then((data) => {
+        this.pastWorkouts = data;
+      });
+    });
 
     this.pastWorkouts.sort((a, b) => {
       // @ts-ignore
