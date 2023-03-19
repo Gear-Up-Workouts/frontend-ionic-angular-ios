@@ -94,7 +94,8 @@ export class ApiService {
         let pastWorkouts = [];
 
         for (let date in data) {
-          let d = new Date(date);
+          let d = new Date(date.replace(/-/g, '/'));
+          console.log(d);
           let workoutSet = JSON.parse(data[date]);
 
           pastWorkouts.push(new WorkoutSetData(workoutSet, d));
