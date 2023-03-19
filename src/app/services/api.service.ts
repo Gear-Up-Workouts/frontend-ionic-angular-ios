@@ -26,6 +26,10 @@ export class ApiService {
     );
   }
 
+  public helloWorld(): Promise<any> {
+    return this.sendRequestToApi('/');
+  }
+
   public getUser(username: string): Promise<any> {
     //creates new user with name "username"
     return this.sendRequestToApi('/newuser/' + username);
@@ -52,12 +56,12 @@ export class ApiService {
     return this.sendRequestToApi("/recommendweight/" + username + "/" + exercise);
   }
 
-  public setGymAccess(username: string, has_access: boolean): Promise<any> {
+  public setGymAccess(username: string, has_access: string): Promise<any> {
     //sets gym access for a specific user
     return this.sendRequestToApi("/setgymaccess/" + username + "/" + has_access);
   }
 
-  public setProficiency(username: string, proficiency: number): Promise<any> {
+  public setProficiency(username: string, proficiency: string): Promise<any> {
     //sets proficiency for a given user
     return this.sendRequestToApi('/setproficiency/' + username + '/' + proficiency);
   }
@@ -69,7 +73,7 @@ export class ApiService {
     return this.sendRequestToApi('/getworkouthistory/' + username);
   }
 
-  public setWorkoutRating(username: string, exercise: string, rating: number): Promise<any> {
+  public setWorkoutRating(username: string, exercise: string, rating: string): Promise<any> {
     /*allows user to rate a specific exercise.
     exercise field is the exercise name with spaces removed
     rating is either 0 or 1, 0 being bad and 1 being good, exercises rated 0 will not be shown again*/
@@ -77,7 +81,7 @@ export class ApiService {
     return this.sendRequestToApi('/setworkoutrating/' + username + '/' + exercise + '/' + rating);
   }
 
-  public recommend(username: string, numexercises: number): Promise<any> {
+  public recommend(username: string, numexercises: string): Promise<any> {
     //returns the daily workout recommendation for the user
     return this.sendRequestToApi('/recommend/' + username + '/' + numexercises);
   }
@@ -103,7 +107,50 @@ export class ApiService {
   // }
 
   test() {
-    return this.sendRequestToApi("/");
+    console.log("API Tests: \n");
+    console.log("Hello World");
+    this.helloWorld();
+
+    console.log("getUser Test");
+    this.getUser("Bravionics");
+    /*
+    console.log("setGoal Test");
+    this.setGoal("Bravionics", "strength");
+
+    console.log("setWeight Test");
+    this.setWeight("Bravionics", "TBSChin-Up", "160", "medium");
+
+    console.log("getRecommendedWeight Test");
+    this.getRecommendedWeight("Bravionics", "TBSChin-Up");
+
+    console.log("setGymAccess Test");
+    this.setGymAccess("Bravionics", 'true');
+
+    console.log("setProficiency Test");
+    this.setProficiency("Bravionics", "expert");
+
+    console.log("getWorkoutHistory Test");
+    this.getWorkoutHistory("Bravionics");
+
+    console.log("setWorkoutRating Test");
+    this.setWorkoutRating("Bravionics", "TBSChin-Up", "1");
+
+
+     */
+    console.log("recommend Test");
+    this.recommend("Bravionics", "5");
+
+    /*
+    console.log("randomTimeAlternativeWorkout Test");
+    this.randomTimeAlternativeWorkout();
+
+    console.log("findNearbyAlternativeWorkouts Test");
+    this.findNearbyAlternativeWorkouts("Bravionics");
+    */
+
+
+
+    return;
   }
 
 }

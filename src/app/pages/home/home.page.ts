@@ -16,6 +16,10 @@ export class HomePage {
   workoutSet: WorkoutSetData = new WorkoutSetData({workouts : []});
 
   constructor(private apiService: ApiService) {
+    //test api calls
+    //this.apiService.test();
+
+
     this.addFakeData();
 
     this.date = new Date();
