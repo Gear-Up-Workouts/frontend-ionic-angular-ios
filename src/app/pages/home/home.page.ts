@@ -91,6 +91,13 @@ export class HomePage {
                   this.apiService.hasOnboarded(this.username).then((bool) => {
                     if (bool) {
                       this.hasOnboarded = true;
+
+                      // Get daily workout
+                      this.apiService
+                        .getDailyWorkout(this.username)
+                        .then((data) => {
+                          this.workoutSet = data;
+                        });
                     } else {
                       this.hasOnboarded = false;
                       console.log('An error has occurred with onboarding.');
