@@ -80,11 +80,28 @@ export class ApiService {
   public getDailyWorkout(
     username: string,
     numWorkouts: number = 5
-  ): Promise<any> {
+  ): Promise<WorkoutSetData> {
     return this.sendRequestToApi(
       '/recommend/' + username + '/' + numWorkouts
     ).then((data) => {
       return new WorkoutSetData(data);
     });
+  }
+
+  public getWorkoutHistory(username: string): Promise<WorkoutSetData[]> {
+    return this.sendRequestToApi('/getworkouthistory/' + username).then(
+      (data) => {
+        let pastWorkouts = [];
+
+        for (let date in data) {
+          let d = new Date(date);
+          let workoutSet = JSON.parse(data[date]);
+
+          pastWorkouts.push(new WorkoutSetData(workoutSet, d));
+        }
+
+        return pastWorkouts;
+      }
+    );
   }
 }
