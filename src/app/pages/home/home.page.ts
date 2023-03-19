@@ -13,37 +13,52 @@ export class HomePage {
   date: Date;
   day: string = '';
   dailyMessage: string = 'Rise and Grind!';
-  workoutSet: WorkoutSetData = new WorkoutSetData({ workouts: [] });
-  hasOnboarded: boolean = false;
+  workoutSet: WorkoutSetData = new WorkoutSetData({ exercises: [] });
+
+  // User onboarding
+  hasOnboarded: boolean = true;
   username: string = '';
-  hasGymAccess: boolean = false;
-  userProficiency: number = 1;
+  hasGymAccess: string = 'false';
+  userProficiency: string = 'intermediate';
+  userGoal: string = '';
 
   constructor(
     private apiService: ApiService,
     private toastController: ToastController
   ) {
-    // this.apiService.clearUser();
+    // Test call to backend
+    // this.apiService.helloWorld();
 
-    this.addFakeData();
+    // Add fake data
+    // this.addFakeData();
 
     this.date = new Date();
     this.updateDay();
     this.setAutoUpdateDate();
 
     // Check if user exists and add welcome toast
-    this.apiService.hasUser().then((bool) => {
-      this.hasOnboarded = bool;
-
+    this.apiService.hasLocalUser().then((bool) => {
       if (bool) {
-        this.apiService.getUser('username').then((user) => {
-          this.presentToast(user);
+        this.apiService.getLocalUser('username').then((user) => {
+          this.apiService.hasOnboarded(user).then((bool) => {
+            if (bool) {
+              this.hasOnboarded = true;
+              this.welcomeBackUser(user);
+
+              // Get daily workout
+              this.apiService.getDailyWorkout(user).then((data) => {
+                this.workoutSet = data;
+              });
+            } else {
+              this.hasOnboarded = false;
+            }
+          });
         });
       }
     });
   }
 
-  async presentToast(username: string) {
+  async welcomeBackUser(username: string) {
     const toast = await this.toastController.create({
       message: 'Welcome back ' + username + '!',
       duration: 1500,
@@ -56,16 +71,48 @@ export class HomePage {
   }
 
   setOnboarding() {
-    this.hasOnboarded = true;
+    // Set local user data
+    this.apiService.setLocalUser('username', this.username);
 
-    // Set user data
-    this.apiService.setUser('username', this.username);
+    this.apiService.createNewUser(this.username).then((ignore) => {
+      // Set gym access
+      this.apiService
+        .setGymAccess(this.username, this.hasGymAccess)
+        .then((ignore) => {
+          // Set proficiency
+          this.apiService
+            .setProficiency(this.username, this.userProficiency)
+            .then((ignore) => {
+              // Set goal
+              this.apiService
+                .setGoal(this.username, this.userGoal)
+                .then((ignore) => {
+                  // Check onboarded
+                  this.apiService.hasOnboarded(this.username).then((bool) => {
+                    if (bool) {
+                      this.hasOnboarded = true;
+
+                      // Get daily workout
+                      this.apiService
+                        .getDailyWorkout(this.username)
+                        .then((data) => {
+                          this.workoutSet = data;
+                        });
+                    } else {
+                      this.hasOnboarded = false;
+                      console.log('An error has occurred with onboarding.');
+                    }
+                  });
+                });
+            });
+        });
+    });
   }
 
   logOut() {
     this.hasOnboarded = false;
 
-    this.apiService.clearUser();
+    this.apiService.clearLocalUser();
   }
 
   updateDay() {
@@ -87,36 +134,36 @@ export class HomePage {
   addFakeData() {
     // Fake data
     this.workoutSet = new WorkoutSetData({
-      workouts: [
+      exercises: [
         {
-          bodyGroup: 'arms',
-          workoutName: 'bicep curls',
-          workoutWeight: 25,
-          workoutReps: 10,
+          muscle: 'arms',
+          name: 'bicep curls',
+          weight: 25,
+          reps: 10,
         },
         {
-          bodyGroup: 'back',
-          workoutName: 'lat pull down',
-          workoutWeight: 65,
-          workoutReps: 8,
+          muscle: 'back',
+          name: 'lat pull down',
+          weight: 65,
+          reps: 8,
         },
         {
-          bodyGroup: 'legs',
-          workoutName: 'squat',
-          workoutWeight: 125,
-          workoutReps: 4,
+          muscle: 'legs',
+          name: 'squat',
+          weight: 125,
+          reps: 4,
         },
         {
-          bodyGroup: 'arms',
-          workoutName: 'tri pull downs',
-          workoutWeight: 35,
-          workoutReps: 10,
+          muscle: 'arms',
+          name: 'tri pull downs',
+          weight: 35,
+          reps: 10,
         },
         {
-          bodyGroup: 'back',
-          workoutName: 'rows',
-          workoutWeight: 55,
-          workoutReps: 7,
+          muscle: 'back',
+          name: 'rows',
+          weight: 0,
+          reps: 7,
         },
       ],
     });
