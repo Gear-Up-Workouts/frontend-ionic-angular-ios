@@ -48,14 +48,14 @@
           <div class="flex justify-center">
             <ion-button
               class="w-4/12"
-              (click)="hasGymAccess = true"
-              [color]="hasGymAccess && 'primary' || 'medium'"
+              (click)="hasGymAccess = 'true'"
+              [color]="hasGymAccess === 'true' && 'primary' || 'medium'"
               >Yes</ion-button
             >
             <ion-button
               class="w-4/12"
-              (click)="hasGymAccess = false"
-              [color]="!hasGymAccess && 'primary' || 'medium'"
+              (click)="hasGymAccess = 'false'"
+              [color]="hasGymAccess === 'false' && 'primary' || 'medium'"
               >No</ion-button
             >
           </div>

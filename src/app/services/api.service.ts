@@ -56,14 +56,19 @@ export class ApiService {
   }
 
   public hasOnboarded(username: string): Promise<any> {
-    return this.sendRequestToApi('/hasonboarded/' + username);
+    return this.sendRequestToApi('/hasonboarded/' + username).then((data) => {
+      if (data['onboarded'] === 'true') {
+        return true;
+      }
+      return false;
+    });
   }
 
   public createNewUser(username: string): Promise<any> {
     return this.sendRequestToApi('/newuser/' + username);
   }
 
-  public setGymAccess(username: string, hasGymAccess: boolean): Promise<any> {
+  public setGymAccess(username: string, hasGymAccess: string): Promise<any> {
     return this.sendRequestToApi(
       '/setgymaccess/' + username + '/' + hasGymAccess
     );

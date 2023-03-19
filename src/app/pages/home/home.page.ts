@@ -16,9 +16,9 @@ export class HomePage {
   workoutSet: WorkoutSetData = new WorkoutSetData({ workouts: [] });
 
   // User onboarding
-  hasOnboarded: boolean = false;
+  hasOnboarded: boolean = true;
   username: string = '';
-  hasGymAccess: boolean = false;
+  hasGymAccess: string = 'false';
   userProficiency: string = 'intermediate';
   userGoal: string = '';
 
@@ -27,10 +27,9 @@ export class HomePage {
     private toastController: ToastController
   ) {
     // Test call to backend
-    this.apiService.helloWorld();
-    // this.apiService.createNewUser('camtest1');
-    // this.apiService.hasOnboarded('camtest1');
+    // this.apiService.helloWorld();
 
+    // Add fake data
     this.addFakeData();
 
     this.date = new Date();
@@ -45,6 +44,8 @@ export class HomePage {
             if (bool) {
               this.hasOnboarded = true;
               this.welcomeBackUser(user);
+            } else {
+              this.hasOnboarded = false;
             }
           });
         });
@@ -68,23 +69,31 @@ export class HomePage {
     // Set local user data
     this.apiService.setLocalUser('username', this.username);
 
-    // Set gym access
-    this.apiService.setGymAccess(this.username, this.hasGymAccess);
-
-    // Set proficiency
-    this.apiService.setProficiency(this.username, this.userProficiency);
-
-    // Set goal
-    this.apiService.setGoal(this.username, this.userGoal);
-
-    // Check onboarded
-    this.apiService.hasOnboarded(this.username).then((bool) => {
-      if (bool) {
-        this.hasOnboarded = true;
-      } else {
-        this.hasOnboarded = false;
-        console.log('An error has occurred with onboarding.');
-      }
+    this.apiService.createNewUser(this.username).then((ignore) => {
+      // Set gym access
+      this.apiService
+        .setGymAccess(this.username, this.hasGymAccess)
+        .then((ignore) => {
+          // Set proficiency
+          this.apiService
+            .setProficiency(this.username, this.userProficiency)
+            .then((ignore) => {
+              // Set goal
+              this.apiService
+                .setGoal(this.username, this.userGoal)
+                .then((ignore) => {
+                  // Check onboarded
+                  this.apiService.hasOnboarded(this.username).then((bool) => {
+                    if (bool) {
+                      this.hasOnboarded = true;
+                    } else {
+                      this.hasOnboarded = false;
+                      console.log('An error has occurred with onboarding.');
+                    }
+                  });
+                });
+            });
+        });
     });
   }
 
