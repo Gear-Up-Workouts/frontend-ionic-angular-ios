@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
+import { WorkoutSetData } from '../data/workout-set-data';
 
 @Injectable({
   providedIn: 'root',
@@ -44,23 +45,14 @@ export class ApiService {
     );
   }
 
-  // aboutMe(): Promise<> {
-  //   //This line is sending a request to express, which returns a promise with some data. We're then parsing the data
-  //   return this.sendRequestToApi("/").then((data) => {
-  //     return new ProfileData(data);
-  //   });
-  // }
-
   public helloWorld(): Promise<any> {
     return this.sendRequestToApi('/');
   }
 
+  //// ONBOARDING
   public hasOnboarded(username: string): Promise<any> {
     return this.sendRequestToApi('/hasonboarded/' + username).then((data) => {
-      if (data['onboarded'] === 'true') {
-        return true;
-      }
-      return false;
+      return data['onboarded'] === 'true';
     });
   }
 
@@ -82,5 +74,17 @@ export class ApiService {
 
   public setGoal(username: string, goal: string): Promise<any> {
     return this.sendRequestToApi('/setgoal/' + username + '/' + goal);
+  }
+
+  //// WORKOUTS
+  public getDailyWorkout(
+    username: string,
+    numWorkouts: number = 5
+  ): Promise<any> {
+    return this.sendRequestToApi(
+      '/recommend/' + username + '/' + numWorkouts
+    ).then((data) => {
+      return new WorkoutSetData(data);
+    });
   }
 }

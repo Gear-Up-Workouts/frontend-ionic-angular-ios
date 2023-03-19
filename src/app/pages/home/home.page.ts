@@ -13,7 +13,7 @@ export class HomePage {
   date: Date;
   day: string = '';
   dailyMessage: string = 'Rise and Grind!';
-  workoutSet: WorkoutSetData = new WorkoutSetData({ workouts: [] });
+  workoutSet: WorkoutSetData = new WorkoutSetData({ exercises: [] });
 
   // User onboarding
   hasOnboarded: boolean = true;
@@ -30,7 +30,7 @@ export class HomePage {
     // this.apiService.helloWorld();
 
     // Add fake data
-    this.addFakeData();
+    // this.addFakeData();
 
     this.date = new Date();
     this.updateDay();
@@ -44,6 +44,11 @@ export class HomePage {
             if (bool) {
               this.hasOnboarded = true;
               this.welcomeBackUser(user);
+
+              // Get daily workout
+              this.apiService.getDailyWorkout(user).then((data) => {
+                this.workoutSet = data;
+              });
             } else {
               this.hasOnboarded = false;
             }
@@ -122,36 +127,36 @@ export class HomePage {
   addFakeData() {
     // Fake data
     this.workoutSet = new WorkoutSetData({
-      workouts: [
+      exercises: [
         {
-          bodyGroup: 'arms',
-          workoutName: 'bicep curls',
-          workoutWeight: 25,
-          workoutReps: 10,
+          muscle: 'arms',
+          name: 'bicep curls',
+          weight: 25,
+          reps: 10,
         },
         {
-          bodyGroup: 'back',
-          workoutName: 'lat pull down',
-          workoutWeight: 65,
-          workoutReps: 8,
+          muscle: 'back',
+          name: 'lat pull down',
+          weight: 65,
+          reps: 8,
         },
         {
-          bodyGroup: 'legs',
-          workoutName: 'squat',
-          workoutWeight: 125,
-          workoutReps: 4,
+          muscle: 'legs',
+          name: 'squat',
+          weight: 125,
+          reps: 4,
         },
         {
-          bodyGroup: 'arms',
-          workoutName: 'tri pull downs',
-          workoutWeight: 35,
-          workoutReps: 10,
+          muscle: 'arms',
+          name: 'tri pull downs',
+          weight: 35,
+          reps: 10,
         },
         {
-          bodyGroup: 'back',
-          workoutName: 'rows',
-          workoutWeight: 55,
-          workoutReps: 7,
+          muscle: 'back',
+          name: 'rows',
+          weight: 55,
+          reps: 7,
         },
       ],
     });

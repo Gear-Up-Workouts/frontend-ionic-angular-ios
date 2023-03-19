@@ -9,6 +9,7 @@ export class WorkoutSetData {
 
   constructor(objectModel: {}, date = new Date()) {
     this.date = date;
+
     this.dateString = this.date.toLocaleDateString('en-US', {
       weekday: 'long',
       month: 'long',
@@ -16,7 +17,7 @@ export class WorkoutSetData {
     });
 
     // @ts-ignore
-    this.workouts = objectModel['workouts'].map((w) => {
+    this.workouts = objectModel['exercises'].map((w) => {
       return new WorkoutData(w);
     });
   }
