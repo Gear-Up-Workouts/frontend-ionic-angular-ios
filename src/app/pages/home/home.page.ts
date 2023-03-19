@@ -62,6 +62,12 @@ export class HomePage {
     this.apiService.setUser('username', this.username);
   }
 
+  logOut() {
+    this.hasOnboarded = false;
+
+    this.apiService.clearUser();
+  }
+
   updateDay() {
     this.date = new Date();
     this.day = this.date.toLocaleDateString('en-US', {
