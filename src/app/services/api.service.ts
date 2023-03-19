@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root',
 })
 export class ApiService {
-  apiBaseUrl: string = 'http://127.0.0.1:5000';
+  apiBaseUrl: string = 'http://localhost:4200/api';
 
   constructor(private http: HttpClient, private storage: Storage) {
     this.storage.create();
@@ -51,7 +51,7 @@ export class ApiService {
   //   });
   // }
 
-  test() {
+  public helloWorld(): Promise<any> {
     return this.sendRequestToApi('/');
   }
 }

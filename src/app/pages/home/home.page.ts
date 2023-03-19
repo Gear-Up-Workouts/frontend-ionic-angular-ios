@@ -23,7 +23,7 @@ export class HomePage {
     private apiService: ApiService,
     private toastController: ToastController
   ) {
-    // this.apiService.clearUser();
+    this.apiService.helloWorld();
 
     this.addFakeData();
 
