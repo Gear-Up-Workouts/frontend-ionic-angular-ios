@@ -23,7 +23,10 @@ export class HomePage {
     private apiService: ApiService,
     private toastController: ToastController
   ) {
+    // Test call to backend
     this.apiService.helloWorld();
+    // this.apiService.createNewUser('camtest1');
+    // this.apiService.hasOnboarded('camtest1');
 
     this.addFakeData();
 

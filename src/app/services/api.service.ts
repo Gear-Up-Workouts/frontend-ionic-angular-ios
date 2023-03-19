@@ -54,4 +54,28 @@ export class ApiService {
   public helloWorld(): Promise<any> {
     return this.sendRequestToApi('/');
   }
+
+  public hasOnboarded(username: string): Promise<any> {
+    return this.sendRequestToApi('/hasonboarded/' + username);
+  }
+
+  public createNewUser(username: string): Promise<any> {
+    return this.sendRequestToApi('/newuser/' + username);
+  }
+
+  public setGymAccess(username: string, hasGymAccess: boolean): Promise<any> {
+    return this.sendRequestToApi(
+      '/setgymaccess/' + username + '/' + hasGymAccess
+    );
+  }
+
+  public setProficiency(username: string, proficiency: string): Promise<any> {
+    return this.sendRequestToApi(
+      '/setproficiency/' + username + '/' + proficiency
+    );
+  }
+
+  public setGoal(username: string, goal: string): Promise<any> {
+    return this.sendRequestToApi('/setgoal/' + username + '/' + goal);
+  }
 }
