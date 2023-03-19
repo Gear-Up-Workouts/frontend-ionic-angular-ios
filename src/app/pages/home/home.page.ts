@@ -14,10 +14,13 @@ export class HomePage {
   day: string = '';
   dailyMessage: string = 'Rise and Grind!';
   workoutSet: WorkoutSetData = new WorkoutSetData({ workouts: [] });
+
+  // User onboarding
   hasOnboarded: boolean = false;
   username: string = '';
   hasGymAccess: boolean = false;
-  userProficiency: number = 1;
+  userProficiency: string = 'intermediate';
+  userGoal: string = '';
 
   constructor(
     private apiService: ApiService,
@@ -35,18 +38,21 @@ export class HomePage {
     this.setAutoUpdateDate();
 
     // Check if user exists and add welcome toast
-    this.apiService.hasUser().then((bool) => {
-      this.hasOnboarded = bool;
-
+    this.apiService.hasLocalUser().then((bool) => {
       if (bool) {
-        this.apiService.getUser('username').then((user) => {
-          this.presentToast(user);
+        this.apiService.getLocalUser('username').then((user) => {
+          this.apiService.hasOnboarded(user).then((bool) => {
+            if (bool) {
+              this.hasOnboarded = true;
+              this.welcomeBackUser(user);
+            }
+          });
         });
       }
     });
   }
 
-  async presentToast(username: string) {
+  async welcomeBackUser(username: string) {
     const toast = await this.toastController.create({
       message: 'Welcome back ' + username + '!',
       duration: 1500,
@@ -59,16 +65,33 @@ export class HomePage {
   }
 
   setOnboarding() {
-    this.hasOnboarded = true;
+    // Set local user data
+    this.apiService.setLocalUser('username', this.username);
 
-    // Set user data
-    this.apiService.setUser('username', this.username);
+    // Set gym access
+    this.apiService.setGymAccess(this.username, this.hasGymAccess);
+
+    // Set proficiency
+    this.apiService.setProficiency(this.username, this.userProficiency);
+
+    // Set goal
+    this.apiService.setGoal(this.username, this.userGoal);
+
+    // Check onboarded
+    this.apiService.hasOnboarded(this.username).then((bool) => {
+      if (bool) {
+        this.hasOnboarded = true;
+      } else {
+        this.hasOnboarded = false;
+        console.log('An error has occurred with onboarding.');
+      }
+    });
   }
 
   logOut() {
     this.hasOnboarded = false;
 
-    this.apiService.clearUser();
+    this.apiService.clearLocalUser();
   }
 
   updateDay() {

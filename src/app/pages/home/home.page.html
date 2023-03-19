@@ -43,35 +43,72 @@
           ></ion-input>
         </div>
 
-        <div class="m-12">
+        <div class="m-8">
           <ion-label position="stacked">Do you have gym access?</ion-label>
-          <br />
-          <ion-button
-            class="w-4/12"
-            (click)="hasGymAccess = true"
-            [color]="hasGymAccess && 'primary' || 'medium'"
-            >Yes</ion-button
-          >
-          <ion-button
-            class="w-4/12"
-            (click)="hasGymAccess = false"
-            [color]="!hasGymAccess && 'primary' || 'medium'"
-            >No</ion-button
-          >
-          <br />
+          <div class="flex justify-center">
+            <ion-button
+              class="w-4/12"
+              (click)="hasGymAccess = true"
+              [color]="hasGymAccess && 'primary' || 'medium'"
+              >Yes</ion-button
+            >
+            <ion-button
+              class="w-4/12"
+              (click)="hasGymAccess = false"
+              [color]="!hasGymAccess && 'primary' || 'medium'"
+              >No</ion-button
+            >
+          </div>
         </div>
 
-        <div class="mb-6">
-          <ion-label position="stacked">Enter your proficiency:</ion-label>
-          <ion-input
-            type="number"
-            placeholder="Enter a number 1-5"
-            [(ngModel)]="userProficiency"
-          ></ion-input>
+        <div class="m-8">
+          <ion-label position="stacked">What is your goal?</ion-label>
+          <div class="flex justify-center">
+            <ion-button
+              class="w-4/12"
+              (click)="userGoal = 'strength'"
+              [color]="userGoal === 'strength' && 'primary' || 'medium'"
+              >Strength</ion-button
+            >
+            <ion-button
+              class="w-4/12"
+              (click)="userGoal = 'weightloss'"
+              [color]="userGoal === 'weightloss' && 'primary' || 'medium'"
+              >Weight Loss</ion-button
+            >
+          </div>
+        </div>
+
+        <div class="mb-32">
+          <ion-label position="stacked">Choose your proficiency:</ion-label>
+          <div class="flex justify-center">
+            <ion-button
+              class="w-fit"
+              (click)="userProficiency = 'beginner'"
+              [color]="userProficiency === 'beginner' && 'primary' || 'medium'"
+              >Beginner</ion-button
+            >
+            <ion-button
+              class="w-fit"
+              (click)="userProficiency = 'intermediate'"
+              [color]="userProficiency === 'intermediate' && 'primary' || 'medium'"
+              >Intermediate</ion-button
+            >
+            <ion-button
+              class="w-fit"
+              (click)="userProficiency = 'expert'"
+              [color]="userProficiency === 'expert' && 'primary' || 'medium'"
+              >Expert</ion-button
+            >
+          </div>
         </div>
 
         <div>
-          <ion-button (click)="setOnboarding()">Complete Onboarding</ion-button>
+          <ion-button
+            [disabled]="username.length < 1 || userGoal.length < 1"
+            (click)="setOnboarding()"
+            >Complete Onboarding</ion-button
+          >
         </div>
       </ion-content>
     </ng-template>
