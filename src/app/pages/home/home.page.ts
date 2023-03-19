@@ -155,7 +155,7 @@ export class HomePage {
         {
           muscle: 'back',
           name: 'rows',
-          weight: 55,
+          weight: 0,
           reps: 7,
         },
       ],
