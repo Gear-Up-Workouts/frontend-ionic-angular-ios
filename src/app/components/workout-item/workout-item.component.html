@@ -1,15 +1,18 @@
 <div
   *ngIf="workout"
-  class="rounded-full bg-secondary my-4 mx-8 h-20 grid grid-cols-8 grid-rows-2 group hover:scale-105 hover:bg-primary transition-all ease-in-out delay-75"
+  class="rounded-full bg-secondary my-4 mx-8 h-20 grid grid-cols-8 grid-rows-2 group hover:scale-105 hover:bg-primary
+  transition-all ease-in-out delay-75"
 >
   <p
-    class="text-center text-xs px-4 font-bold col-start-1 col-span-2 row-span-2 self-center capitalize border-r-4 border-double group-hover:text-secondary group-hover:border-secondary"
+    class="text-center text-xs px-4 font-bold col-start-1 col-span-2 row-span-2 self-center capitalize border-r-4
+    border-double group-hover:text-secondary group-hover:border-secondary"
   >
     {{ workout.bodyGroup }}
   </p>
 
   <p
-    class="text-center text-sm font-medium ml-3 col-start-3 col-span-3 row-span-2 self-center capitalize group-hover:text-secondary"
+    class="text-center text-sm font-medium ml-3 col-start-3 col-span-3 row-span-2 self-center capitalize
+    group-hover:text-secondary"
   >
     {{ workout.workoutName }}
   </p>

@@ -59,10 +59,21 @@ export class HomePage {
 
             // Get alt workout, delay for 5 sec
             this.apiService.getAltWorkouts().then((data) => {
+              let currentDate = new Date();
+              let futureDate = data.time;
+              let millisecondsToWait =
+                futureDate.getTime() - currentDate.getTime();
+
+              console.log(
+                'Waiting for: ',
+                millisecondsToWait,
+                'ms to activate alt workout'
+              );
+
               setTimeout(() => {
                 this.altWorkoutSet = data;
                 console.log(this.altWorkoutSet);
-              }, 5000);
+              }, millisecondsToWait);
             });
           });
         });
