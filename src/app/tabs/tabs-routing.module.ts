@@ -9,28 +9,33 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () => import('../pages/home/home.module').then(m => m.HomePageModule)
+        loadChildren: () =>
+          import('../pages/home/home.module').then((m) => m.HomePageModule),
       },
       {
-        path: 'weekly-log',
-        loadChildren: () => import('../pages/weekly-log/weekly-log.module').then(m => m.Tab2PageModule)
+        path: 'stats',
+        loadChildren: () =>
+          import('../pages/stats/stats.module').then((m) => m.StatsPageModule),
       },
       {
         path: 'past-workouts',
-        loadChildren: () => import('../pages/past-workouts/past-workouts.module').then(m => m.Tab3PageModule)
+        loadChildren: () =>
+          import('../pages/past-workouts/past-workouts.module').then(
+            (m) => m.Tab3PageModule
+          ),
       },
       {
         path: '',
         redirectTo: '/tabs/home',
-        pathMatch: 'full'
-      }
-    ]
+        pathMatch: 'full',
+      },
+    ],
   },
   {
     path: '',
     redirectTo: '/tabs/home',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
