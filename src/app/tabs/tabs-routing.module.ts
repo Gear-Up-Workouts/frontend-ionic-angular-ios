@@ -21,7 +21,7 @@ const routes: Routes = [
         path: 'past-workouts',
         loadChildren: () =>
           import('../pages/past-workouts/past-workouts.module').then(
-            (m) => m.Tab3PageModule
+            (m) => m.PastWorkoutsPageModule
           ),
       },
       {
