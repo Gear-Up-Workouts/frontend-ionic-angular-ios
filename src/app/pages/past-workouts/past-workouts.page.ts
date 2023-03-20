@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, Component, DoCheck } from '@angular/core';
 import { WorkoutSetData } from '../../data/workout-set-data';
 import { interval } from 'rxjs';
 import { ApiService } from '../../services/api.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-past-workouts',
@@ -13,23 +14,33 @@ export class PastWorkoutsPage {
   todayDate: string = '';
   yesterdayDate: string = '';
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private router: Router) {
     // Add fake data
     // this.addFakeData();
 
     this.updateDay();
     this.setAutoUpdateDate();
 
+    this.updatePastWorkouts();
+
+    router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        this.updatePastWorkouts();
+      }
+    });
+  }
+
+  updatePastWorkouts() {
     // Get local user and display past workouts
     this.apiService.getLocalUser('username').then((user) => {
       this.apiService.getWorkoutHistory(user).then((data) => {
         this.pastWorkouts = data;
-      });
-    });
 
-    this.pastWorkouts.sort((a, b) => {
-      // @ts-ignore
-      return b.date - a.date;
+        this.pastWorkouts.sort((a, b) => {
+          // @ts-ignore
+          return b.date - a.date;
+        });
+      });
     });
   }
 

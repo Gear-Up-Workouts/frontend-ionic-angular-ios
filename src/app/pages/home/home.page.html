@@ -1,15 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Home </ion-title>
+    <ion-title> Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="w-full grid grid-cols-1 justify-center mt-14">
     <p class="text-center text-4xl font-bold">{{day}}</p>
-    <p class="text-center text-3xl py-10 w-full text-primary animate-pulse">
+    <p
+      class="text-center text-3xl py-10 w-full text-primary animate-pulse"
+      *ngIf="!altWorkoutSet.isAltWorkout"
+    >
       {{dailyMessage}}
     </p>
+
+    <div
+      class="text-center text-3xl py-10 w-full text-primary animate-pulse"
+      *ngIf="altWorkoutSet.isAltWorkout"
+    >
+      <ion-icon name="alert-circle-outline" class="animate-bounce"></ion-icon>
+      <div (click)="altWorkoutModal.present()">
+        Tap for an Alternative Workout!
+      </div>
+    </div>
+
     <p class="text-center mb-4">Today's Workout</p>
   </div>
   <app-workout-item-list
@@ -22,10 +36,12 @@
       shape="round"
       color="medium"
       class="hover:scale-105"
-      >Sign Out</ion-button
+    >Sign Out
+    </ion-button
     >
   </div>
 
+  <!--  Onboarding Modal-->
   <ion-modal [isOpen]="!hasOnboarded">
     <ng-template>
       <ion-header>
@@ -50,13 +66,15 @@
               class="w-4/12"
               (click)="hasGymAccess = 'true'"
               [color]="hasGymAccess === 'true' && 'primary' || 'medium'"
-              >Yes</ion-button
+            >Yes
+            </ion-button
             >
             <ion-button
               class="w-4/12"
               (click)="hasGymAccess = 'false'"
               [color]="hasGymAccess === 'false' && 'primary' || 'medium'"
-              >No</ion-button
+            >No
+            </ion-button
             >
           </div>
         </div>
@@ -68,13 +86,15 @@
               class="w-4/12"
               (click)="userGoal = 'strength'"
               [color]="userGoal === 'strength' && 'primary' || 'medium'"
-              >Strength</ion-button
+            >Strength
+            </ion-button
             >
             <ion-button
               class="w-4/12"
               (click)="userGoal = 'weightloss'"
               [color]="userGoal === 'weightloss' && 'primary' || 'medium'"
-              >Weight Loss</ion-button
+            >Weight Loss
+            </ion-button
             >
           </div>
         </div>
@@ -86,19 +106,22 @@
               class="w-fit"
               (click)="userProficiency = 'beginner'"
               [color]="userProficiency === 'beginner' && 'primary' || 'medium'"
-              >Beginner</ion-button
+            >Beginner
+            </ion-button
             >
             <ion-button
               class="w-fit"
               (click)="userProficiency = 'intermediate'"
               [color]="userProficiency === 'intermediate' && 'primary' || 'medium'"
-              >Intermediate</ion-button
+            >Intermediate
+            </ion-button
             >
             <ion-button
               class="w-fit"
               (click)="userProficiency = 'expert'"
               [color]="userProficiency === 'expert' && 'primary' || 'medium'"
-              >Expert</ion-button
+            >Expert
+            </ion-button
             >
           </div>
         </div>
@@ -107,10 +130,70 @@
           <ion-button
             [disabled]="username.length < 1 || userGoal.length < 1"
             (click)="setOnboarding()"
-            >Complete Onboarding</ion-button
+          >Complete Onboarding
+          </ion-button
           >
         </div>
       </ion-content>
     </ng-template>
   </ion-modal>
+
+  <!--  Alt Workout Modal-->
+  <ion-modal #altWorkoutModal>
+    <ng-template>
+      <ion-content>
+        <ion-toolbar>
+          <ion-title>Alt Workouts Near You</ion-title>
+        </ion-toolbar>
+
+        <div class="text-center mt-14">
+          <div class="text-3xl px-6">Are you ready for a <span class="capitalize animate-pulse text-primary">
+            {{this.altWorkoutSet.workoutType}}</span> workout?
+          </div>
+          <div class="mt-10 px-6">Here's a curated list of Alternative Workouts based on your current location and
+            time:
+          </div>
+
+
+          <div *ngFor="let workout of altWorkoutSet.workouts" class="rounded-2xl bg-secondary my-4 mx-8 h-32 grid grid-cols-8
+          grid-rows-3 group hover:scale-105 hover:bg-primary transition-all ease-in-out delay-75">
+
+            <p
+              class="text-center text-xs px-4 font-bold row-span-3 col-start-1 col-span-3 self-center capitalize border-r-4
+              border-double group-hover:text-secondary group-hover:border-secondary"
+            >
+              {{ workout.workoutName }}
+            </p>
+
+            <ion-icon name="location-outline" class="text-2xl justify-self-center ml-3 self-end row-span-1 row-start-1
+            col-start-4 col-span-3 group-hover:text-secondary text-red-500 animate-bounce"></ion-icon>
+
+            <p
+              class="text-center text-sm font-medium ml-3 mt-2 self-start row-span-2 row-start-2 col-start-4 col-span-3 capitalize
+              group-hover:text-secondary"
+            >
+              <a [href]="workout.mapsLink" class="text-blue-200 animate-pulse group-hover:text-secondary">{{ workout.address }}</a>
+            </p>
+
+            <div
+              class="row-span-3 col-start-7 col-span-2 flex group-hover:text-secondary self-center ml-4"
+            >
+              <ion-icon
+                class="text-center pr-1 self-center"
+                name="star-outline"
+                color="warning"
+              ></ion-icon>
+              <p class="text-center">{{workout.rating}}</p>
+            </div>
+          </div>
+
+          <ion-button color="primary" (click)="altWorkoutModal.dismiss()"
+          >Done
+          </ion-button
+          >
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>
