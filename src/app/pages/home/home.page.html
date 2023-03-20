@@ -7,9 +7,23 @@
 <ion-content [fullscreen]="true">
   <div class="w-full grid grid-cols-1 justify-center mt-14">
     <p class="text-center text-4xl font-bold">{{day}}</p>
-    <p class="text-center text-3xl py-10 w-full text-primary animate-pulse">
+    <p
+      class="text-center text-3xl py-10 w-full text-primary animate-pulse"
+      *ngIf="!altWorkoutSet.isAltWorkout"
+    >
       {{dailyMessage}}
     </p>
+
+    <div
+      class="text-center text-3xl py-10 w-full text-primary animate-pulse"
+      *ngIf="altWorkoutSet.isAltWorkout"
+    >
+      <ion-icon name="alert-circle-outline" class="animate-bounce"></ion-icon>
+      <div (click)="altWorkoutModal.present()">
+        Tap for an Alternative Workout!
+      </div>
+    </div>
+
     <p class="text-center mb-4">Today's Workout</p>
   </div>
   <app-workout-item-list
@@ -26,6 +40,7 @@
     >
   </div>
 
+  <!--  Onboarding Modal-->
   <ion-modal [isOpen]="!hasOnboarded">
     <ng-template>
       <ion-header>
@@ -110,6 +125,21 @@
             >Complete Onboarding</ion-button
           >
         </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!--  Alt Workout Modal-->
+  <ion-modal #altWorkoutModal>
+    <ng-template>
+      <ion-content>
+        <ion-toolbar>
+          <ion-title>Alt Workouts Near You</ion-title>
+        </ion-toolbar>
+        Test
+        <ion-button color="primary" (click)="altWorkoutModal.dismiss()"
+          >Close</ion-button
+        >
       </ion-content>
     </ng-template>
   </ion-modal>

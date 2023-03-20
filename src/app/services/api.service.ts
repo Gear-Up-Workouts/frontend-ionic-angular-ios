@@ -3,6 +3,8 @@ import { lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
 import { WorkoutSetData } from '../data/workout-set-data';
+import { data } from 'autoprefixer';
+import { AltWorkoutSetData } from '../data/alt-workout-set-data';
 
 @Injectable({
   providedIn: 'root',
@@ -102,6 +104,15 @@ export class ApiService {
         }
 
         return pastWorkouts;
+      }
+    );
+  }
+
+  //// ALT WORKOUTS
+  public getAltWorkouts() {
+    return this.sendRequestToApi('/findNearbyAlternativeWorkouts').then(
+      (data) => {
+        return new AltWorkoutSetData(data);
       }
     );
   }

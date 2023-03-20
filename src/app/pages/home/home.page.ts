@@ -3,6 +3,7 @@ import { interval } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { WorkoutSetData } from '../../data/workout-set-data';
 import { ToastController } from '@ionic/angular';
+import { AltWorkoutSetData } from '../../data/alt-workout-set-data';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,9 @@ export class HomePage {
   day: string = '';
   dailyMessage: string = 'Rise and Grind!';
   workoutSet: WorkoutSetData = new WorkoutSetData({ exercises: [] });
+  altWorkoutSet: AltWorkoutSetData = new AltWorkoutSetData({
+    LiveWorkouts: [],
+  });
 
   // User onboarding
   hasOnboarded: boolean = true;
@@ -52,6 +56,14 @@ export class HomePage {
             } else {
               this.hasOnboarded = false;
             }
+
+            // Get alt workout, delay for 5 sec
+            this.apiService.getAltWorkouts().then((data) => {
+              setTimeout(() => {
+                this.altWorkoutSet = data;
+                console.log(this.altWorkoutSet);
+              }, 5000);
+            });
           });
         });
       }
