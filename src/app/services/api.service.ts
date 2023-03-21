@@ -3,8 +3,8 @@ import { lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
 import { WorkoutSetData } from '../data/workout-set-data';
-import { data } from 'autoprefixer';
 import { AltWorkoutSetData } from '../data/alt-workout-set-data';
+import { StatsData } from '../data/stats-data';
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +21,8 @@ export class ApiService {
     this.storage.set(key, value);
   }
 
-  public async getLocalUser(key: string) {
-    return await this.storage.get(key);
+  public async getLocalUser() {
+    return await this.storage.get('username');
   }
 
   public async hasLocalUser() {
@@ -115,5 +115,13 @@ export class ApiService {
         return new AltWorkoutSetData(data);
       }
     );
+  }
+
+  //// STATS
+  public getUserStats(username: string) {
+    return this.sendRequestToApi('/getstats/' + username).then((data) => {
+      console.log(data);
+      return new StatsData(data);
+    });
   }
 }

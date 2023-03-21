@@ -32,7 +32,7 @@ export class PastWorkoutsPage {
 
   updatePastWorkouts() {
     // Get local user and display past workouts
-    this.apiService.getLocalUser('username').then((user) => {
+    this.apiService.getLocalUser().then((user) => {
       this.apiService.getWorkoutHistory(user).then((data) => {
         this.pastWorkouts = data;
 

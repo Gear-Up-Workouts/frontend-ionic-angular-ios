@@ -43,7 +43,7 @@ export class HomePage {
     // Check if user exists and add welcome toast
     this.apiService.hasLocalUser().then((bool) => {
       if (bool) {
-        this.apiService.getLocalUser('username').then((user) => {
+        this.apiService.getLocalUser().then((user) => {
           this.apiService.hasOnboarded(user).then((bool) => {
             if (bool) {
               this.hasOnboarded = true;
