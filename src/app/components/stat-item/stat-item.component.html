@@ -1,5 +1,7 @@
 <div
-  class="rounded-2xl bg-secondary my-4 mx-8 h-20 grid grid-cols-8 grid-rows-2 group hover:scale-105 hover:bg-primary transition-all ease-in-out delay-75"
+  class="content-center rounded-2xl bg-secondary my-4 mx-8 h-20 grid grid-cols-8 group hover:scale-105 hover:bg-primary transition-all ease-in-out delay-75"
 >
-
+  <ion-icon [name]="icon" class="text-4xl col-start-1 col-span-2 justify-self-center self-center"></ion-icon>
+  <div class="text-center col-start-3 col-span-5">{{prefix}} <span
+    class="animate-pulse text-primary group-hover:text-tertiary">{{stat}}</span> {{suffix}}</div>
 </div>

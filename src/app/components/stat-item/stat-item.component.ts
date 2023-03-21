@@ -6,7 +6,10 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./stat-item.component.scss'],
 })
 export class StatItemComponent implements OnInit {
-  @Input() stat?: string;
+  @Input() stat: number = 0;
+  @Input() icon: string = '';
+  @Input() prefix: string = '';
+  @Input() suffix: string = '';
 
   constructor() {}
 
