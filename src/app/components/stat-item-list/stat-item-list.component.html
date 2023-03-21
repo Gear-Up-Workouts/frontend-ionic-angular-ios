@@ -1,0 +1,6 @@
+<div *ngIf="stats">
+  <app-stat-item [stat]="stats.totalDays" [icon]="'hourglass-outline'" [prefix]="'You\'ve worked out for a total of'" [suffix]="'days'"></app-stat-item>
+  <app-stat-item [stat]="stats.totalReps" [icon]="'repeat-outline'" [prefix]="'You\'ve done'" [suffix]="'total reps'"></app-stat-item>
+  <app-stat-item [stat]="stats.totalWeight" [icon]="'barbell-outline'" [prefix]="'You\'ve lifted'" [suffix]="'lbs in total weight'"></app-stat-item>
+</div>
+

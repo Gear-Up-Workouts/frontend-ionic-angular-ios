@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { PastWorkoutsPage } from './past-workouts.page';
 
 import { PastWorkoutsPageRoutingModule } from './past-workouts-routing.module';
-import {WorkoutItemComponentModule} from "../../components/workout-item/workout-item.module";
+import { WorkoutItemComponentModule } from '../../components/workout-item/workout-item.module';
 
 @NgModule({
   imports: [
@@ -17,4 +17,4 @@ import {WorkoutItemComponentModule} from "../../components/workout-item/workout-
   ],
   declarations: [PastWorkoutsPage],
 })
-export class Tab3PageModule {}
+export class PastWorkoutsPageModule {}
