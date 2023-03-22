@@ -82,11 +82,61 @@ export class HomePage {
     });
   }
 
-  sendWorkoutRating() {}
+  doWorkoutRating() {
+    this.sendWorkoutRating();
+    this.sendWorkoutDifficulty();
+    if (this.ratingWorkoutData) {
+      this.ratingSaved(this.ratingWorkoutData?.workoutName);
+    }
+  }
+
+  sendWorkoutRating() {
+    this.apiService.hasLocalUser().then((bool) => {
+      if (bool) {
+        this.apiService.getLocalUser().then((user) => {
+          if (this.ratingWorkoutData) {
+            this.apiService.sendWorkoutRating(
+              user,
+              this.ratingWorkoutData.workoutName,
+              this.ratingWorkoutRating
+            );
+          }
+        });
+      }
+    });
+  }
+
+  sendWorkoutDifficulty() {
+    this.apiService.hasLocalUser().then((bool) => {
+      if (bool) {
+        this.apiService.getLocalUser().then((user) => {
+          if (this.ratingWorkoutData) {
+            this.apiService.sendWorkoutDifficulty(
+              user,
+              this.ratingWorkoutData.workoutName,
+              this.ratingWorkoutDifficulty
+            );
+          }
+        });
+      }
+    });
+  }
 
   activateWorkoutRatingModal(workoutData: WorkoutData) {
     this.ratingWorkoutData = workoutData;
     console.log(this.ratingWorkoutData);
+  }
+
+  async ratingSaved(workoutName: string) {
+    const toast = await this.toastController.create({
+      message: 'Your rating for ' + workoutName + ' has been saved!',
+      duration: 3000,
+      position: 'top',
+      icon: 'save-outline',
+      cssClass: 'text-center capitalize',
+    });
+
+    await toast.present();
   }
 
   async welcomeBackUser(username: string) {

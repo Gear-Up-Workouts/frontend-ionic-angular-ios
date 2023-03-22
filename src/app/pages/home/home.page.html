@@ -268,7 +268,9 @@
 
           </div>
 
-          <ion-button color="primary" (click)="workoutRatingModal.dismiss(); " [disabled]="!ratingWorkoutData"
+          <ion-button color="primary"
+                      (click)="workoutRatingModal.dismiss(); doWorkoutRating()"
+                      [disabled]="!ratingWorkoutData"
                       class="justify-self-center"
           >Done
           </ion-button
