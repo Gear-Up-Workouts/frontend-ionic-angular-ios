@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { WorkoutSetData } from '../../data/workout-set-data';
 import { ToastController } from '@ionic/angular';
 import { AltWorkoutSetData } from '../../data/alt-workout-set-data';
+import { WorkoutData } from '../../data/workout-data';
 
 @Component({
   selector: 'app-home',
@@ -26,16 +27,16 @@ export class HomePage {
   userProficiency: string = 'intermediate';
   userGoal: string = '';
 
+  // Workout Rating Moda
+  ratingWorkoutData?: WorkoutData;
+  ratingWorkoutRating: number = 1;
+  ratingWorkoutDifficulty: string = 'medium';
+
   constructor(
     private apiService: ApiService,
     private toastController: ToastController
   ) {
-    // Test call to backend
-    // this.apiService.helloWorld();
-
-    // Add fake data
-    // this.addFakeData();
-
+    // Get and auto update date
     this.date = new Date();
     this.updateDay();
     this.setAutoUpdateDate();
@@ -79,6 +80,13 @@ export class HomePage {
         });
       }
     });
+  }
+
+  sendWorkoutRating() {}
+
+  activateWorkoutRatingModal(workoutData: WorkoutData) {
+    this.ratingWorkoutData = workoutData;
+    console.log(this.ratingWorkoutData);
   }
 
   async welcomeBackUser(username: string) {
@@ -151,44 +159,6 @@ export class HomePage {
     const secondCounter = interval(60 * 1000);
     secondCounter.subscribe(() => {
       this.updateDay();
-    });
-  }
-
-  addFakeData() {
-    // Fake data
-    this.workoutSet = new WorkoutSetData({
-      exercises: [
-        {
-          muscle: 'arms',
-          name: 'bicep curls',
-          weight: 25,
-          reps: 10,
-        },
-        {
-          muscle: 'back',
-          name: 'lat pull down',
-          weight: 65,
-          reps: 8,
-        },
-        {
-          muscle: 'legs',
-          name: 'squat',
-          weight: 125,
-          reps: 4,
-        },
-        {
-          muscle: 'arms',
-          name: 'tri pull downs',
-          weight: 35,
-          reps: 10,
-        },
-        {
-          muscle: 'back',
-          name: 'rows',
-          weight: 0,
-          reps: 7,
-        },
-      ],
     });
   }
 }

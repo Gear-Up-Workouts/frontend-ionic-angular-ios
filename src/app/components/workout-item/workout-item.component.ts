@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WorkoutData } from '../../data/workout-data';
 
 // noinspection AngularMissingOrInvalidDeclarationInModule
@@ -8,10 +8,16 @@ import { WorkoutData } from '../../data/workout-data';
   styleUrls: ['./workout-item.component.scss'],
 })
 export class WorkoutItemComponent implements OnInit {
+  @Output() rateWorkoutEventComponent = new EventEmitter<WorkoutData>();
+
   @Input()
   workout?: WorkoutData;
 
   constructor() {}
+
+  activateWorkoutRatingModalComponent() {
+    this.rateWorkoutEventComponent.emit(this.workout);
+  }
 
   ngOnInit() {}
 }
