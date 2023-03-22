@@ -79,6 +79,8 @@ export class HomePage {
             });
           });
         });
+      } else {
+        this.hasOnboarded = false;
       }
     });
   }
