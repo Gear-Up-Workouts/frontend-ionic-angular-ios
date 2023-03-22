@@ -124,4 +124,35 @@ export class ApiService {
       return new StatsData(data);
     });
   }
+
+  //// WORKOUT RATING
+  public sendWorkoutRating(
+    username: string,
+    workoutName: string,
+    workoutRating: number
+  ) {
+    return this.sendRequestToApi(
+      '/setworkoutrating/' +
+        username +
+        '/' +
+        workoutName.replace(' ', '') +
+        '/' +
+        workoutRating
+    );
+  }
+
+  public sendWorkoutDifficulty(
+    username: string,
+    workoutName: string,
+    workoutDifficulty: string
+  ) {
+    return this.sendRequestToApi(
+      '/rateexercise/' +
+        username +
+        '/' +
+        workoutName.replace(' ', '') +
+        '/' +
+        workoutDifficulty
+    );
+  }
 }

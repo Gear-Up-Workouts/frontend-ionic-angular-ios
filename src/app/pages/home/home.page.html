@@ -28,6 +28,7 @@
   </div>
   <app-workout-item-list
     [workouts]="workoutSet.workouts"
+    (rateWorkoutEventList)="activateWorkoutRatingModal($event); workoutRatingModal.present()"
   ></app-workout-item-list>
 
   <div class="flex justify-center mt-4">
@@ -172,7 +173,8 @@
               class="text-center text-sm font-medium ml-3 mt-2 self-start row-span-2 row-start-2 col-start-4 col-span-3 capitalize
               group-hover:text-secondary"
             >
-              <a [href]="workout.mapsLink" class="text-blue-200 animate-pulse group-hover:text-secondary">{{ workout.address }}</a>
+              <a [href]="workout.mapsLink"
+                 class="text-blue-200 animate-pulse group-hover:text-secondary">{{ workout.address }}</a>
             </p>
 
             <div
@@ -188,6 +190,88 @@
           </div>
 
           <ion-button color="primary" (click)="altWorkoutModal.dismiss()"
+          >Done
+          </ion-button
+          >
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!--  Workout Rating Modal-->
+  <ion-modal #workoutRatingModal>
+    <ng-template>
+      <ion-content>
+        <ion-toolbar>
+          <ion-title>Rate Your Workout</ion-title>
+        </ion-toolbar>
+
+        <div class="grid">
+          <div *ngIf="ratingWorkoutData" class="text-center">
+            <p class="text-4xl mt-24 capitalize text-primary animate-pulse">{{ratingWorkoutData.workoutName}}</p>
+
+            <div class="flex justify-evenly mt-3">
+              <div>{{ratingWorkoutData.bodyGroup}}</div>
+              <div class="flex">
+                <ion-icon
+                  class="text-center pr-2 self-center"
+                  name="barbell-outline"
+                ></ion-icon>
+                {{ratingWorkoutData.workoutWeight}}
+              </div>
+              <div class="flex">
+                <ion-icon
+                  class="text-center pr-2 self-center"
+                  name="repeat-outline"
+                ></ion-icon>
+                {{ratingWorkoutData.workoutReps}}
+              </div>
+            </div>
+
+
+            <div class="mt-14 mb-8">
+              <ion-label position="stacked">Did you like this exercise?</ion-label>
+              <div class="flex justify-center mt-3">
+                <ion-icon name="thumbs-up-outline" (click)="ratingWorkoutRating = 1"
+                          [color]="ratingWorkoutRating === 1 && 'primary' || 'medium'" class="text-3xl mx-1"></ion-icon>
+                <ion-icon name="thumbs-down-outline" (click)="ratingWorkoutRating = 0"
+                          [color]="ratingWorkoutRating === 0 && 'primary' || 'medium'" class="text-3xl mx-1"></ion-icon>
+              </div>
+            </div>
+
+            <div class="mb-32">
+              <ion-label position="stacked">How would you rate it's difficulty?</ion-label>
+              <div class="flex justify-center">
+                <ion-button
+                  class="w-fit"
+                  (click)="ratingWorkoutDifficulty = 'easy'"
+                  [color]="ratingWorkoutDifficulty === 'easy' && 'primary' || 'medium'"
+                >Easy
+                </ion-button
+                >
+                <ion-button
+                  class="w-fit"
+                  (click)="ratingWorkoutDifficulty = 'medium'"
+                  [color]="ratingWorkoutDifficulty === 'medium' && 'primary' || 'medium'"
+                >Medium
+                </ion-button
+                >
+                <ion-button
+                  class="w-fit"
+                  (click)="ratingWorkoutDifficulty = 'hard'"
+                  [color]="ratingWorkoutDifficulty === 'hard' && 'primary' || 'medium'"
+                >Hard
+                </ion-button
+                >
+              </div>
+            </div>
+
+          </div>
+
+          <ion-button color="primary"
+                      (click)="workoutRatingModal.dismiss(); doWorkoutRating()"
+                      [disabled]="!ratingWorkoutData"
+                      class="justify-self-center"
           >Done
           </ion-button
           >
