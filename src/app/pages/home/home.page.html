@@ -210,21 +210,50 @@
           <div *ngIf="ratingWorkoutData" class="text-center">
             <p class="text-4xl mt-24 capitalize text-primary animate-pulse">{{ratingWorkoutData.workoutName}}</p>
 
-            <div class="flex justify-evenly mt-3">
+            <div class="flex justify-evenly mt-3"
+                 *ngIf="ratingWorkoutData.workoutReps > 0 || ratingWorkoutData.workoutWeight > 0">
+
               <div>{{ratingWorkoutData.bodyGroup}}</div>
+
+
               <div class="flex">
+
                 <ion-icon
                   class="text-center pr-2 self-center"
                   name="barbell-outline"
                 ></ion-icon>
-                {{ratingWorkoutData.workoutWeight}}
+
+                <div *ngIf="ratingWorkoutData.workoutWeight === 0">
+                  BW
+                </div>
+
+                <div *ngIf="ratingWorkoutData.workoutWeight > 0">
+                  {{ratingWorkoutData.workoutWeight}} lbs
+                </div>
+
               </div>
+
               <div class="flex">
+
                 <ion-icon
                   class="text-center pr-2 self-center"
                   name="repeat-outline"
                 ></ion-icon>
-                {{ratingWorkoutData.workoutReps}}
+
+                x {{ratingWorkoutData.workoutReps}}
+
+              </div>
+            </div>
+
+            <div class="flex justify-evenly mt-3"
+                 *ngIf="ratingWorkoutData.workoutReps === 0 && ratingWorkoutData.workoutWeight === 0">
+              <div>{{ratingWorkoutData.bodyGroup}}</div>
+              <div class="flex">
+                <ion-icon
+                  class="text-center pr-2 self-center"
+                  name="stopwatch-outline"
+                ></ion-icon>
+                Paced
               </div>
             </div>
 

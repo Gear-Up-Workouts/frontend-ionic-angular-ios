@@ -45,6 +45,7 @@ export class HomePage {
     this.apiService.hasLocalUser().then((bool) => {
       if (bool) {
         this.apiService.getLocalUser().then((user) => {
+          this.username = user;
           this.apiService.hasOnboarded(user).then((bool) => {
             if (bool) {
               this.hasOnboarded = true;
