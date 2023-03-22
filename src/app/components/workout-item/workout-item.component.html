@@ -18,8 +18,11 @@
     {{ workout.workoutName }}
   </p>
 
+
+<!--  Repped-->
   <div
     class="col-start-6 col-span-3 row-span-1 self-end flex ml-3 group-hover:text-secondary"
+    *ngIf="workout.workoutReps > 0 || workout.workoutWeight > 0"
   >
     <ion-icon
       class="text-center pr-2 self-center"
@@ -33,11 +36,24 @@
 
   <div
     class="col-start-6 col-span-3 row-span-1 self-start flex ml-3 group-hover:text-secondary"
+    *ngIf="workout.workoutReps > 0 || workout.workoutWeight > 0"
   >
     <ion-icon
       class="text-center pr-2 self-center"
       name="repeat-outline"
     ></ion-icon>
     <p class="text-center">x {{ workout.workoutReps }}</p>
+  </div>
+
+<!--  Cardio-->
+  <div
+    class="col-start-6 col-span-3 row-span-2 self-center flex ml-3 group-hover:text-secondary"
+    *ngIf="workout.workoutReps === 0 && workout.workoutWeight === 0"
+  >
+    <ion-icon
+      class="text-center pr-2 self-center"
+      name="stopwatch-outline"
+    ></ion-icon>
+    Paced
   </div>
 </div>
