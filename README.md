@@ -72,7 +72,7 @@ Additional App Features
 - Use of **Angular Event Emitters** to activate global modals from child components
 - **Tabular** app design using **Angular Router**
 - Uses **Angular Proxy** to bypass CORS errors with local development
-- Dynamic object creation using data packaging with custom data containers from json returned by the RedditAPI
+- Dynamic object creation using data packaging with custom data containers from json returned by our custom API
 
 In The Works
 --
