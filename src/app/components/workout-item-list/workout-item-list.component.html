@@ -1,6 +1,7 @@
 <div *ngIf="workouts">
   <div *ngFor="let w of workouts">
-    <app-workout-item [workout]="w" (rateWorkoutEventComponent)="activateWorkoutRatingModalList($event)"></app-workout-item>
+    <app-workout-item [workout]="w"
+                      (rateWorkoutEventComponent)="activateWorkoutRatingModalList($event)"></app-workout-item>
   </div>
 </div>
 

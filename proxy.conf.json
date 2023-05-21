@@ -1,6 +1,7 @@
 {
   "/api": {
-    "target": "http://127.0.0.1:5000",
-    "secure": false
+    "target": "https://gear-up-workouts-backend-flask-r0lduekf6-radicitus.vercel.app",
+    "secure": false,
+    "changeOrigin": true
   }
 }

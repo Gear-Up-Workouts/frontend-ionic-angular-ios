@@ -131,12 +131,17 @@ export class HomePage {
   }
 
   async ratingSaved(workoutName: string) {
+    let workout = workoutName.toLowerCase()
+      .split(' ')
+      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+      .join(' ');
+
     const toast = await this.toastController.create({
-      message: 'Your rating for ' + workoutName + ' has been saved!',
+      message: 'Your rating for ' + workout + ' has been saved!',
       duration: 3000,
       position: 'top',
       icon: 'save-outline',
-      cssClass: 'text-center capitalize',
+      cssClass: 'text-center',
     });
 
     await toast.present();

@@ -10,7 +10,7 @@ import { StatsData } from '../data/stats-data';
   providedIn: 'root',
 })
 export class ApiService {
-  apiBaseUrl: string = 'http://localhost:4200/api';
+  apiBaseUrl: string = 'https://gear-up-workouts-backend-flask-r0lduekf6-radicitus.vercel.app/api';
 
   constructor(private http: HttpClient, private storage: Storage) {
     this.storage.create();
