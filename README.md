@@ -1,7 +1,8 @@
 # Gear Up Workouts: Front End
-Hey there!
-This is the repository for the **Gear Up Workouts** front end.
-Try out the app live at: [gup.cameronsherry.com](https://gup.cameronsherry.com) !
+Hey there!  
+
+This is the repository for the **Gear Up Workouts** front end.  
+Try out the app live at: [gup.cameronsherry.com](https://gup.cameronsherry.com) with user **camtest1**!
 
 It is a **multiplatform**, **mobile-first**, **reactive**, **single page** web app built with **[Ionic](https://ionicframework.com/)**, **[TailwindCSS](https://tailwindcss.com/)**, and **[Angular](https://angular.io/)**.  
 
